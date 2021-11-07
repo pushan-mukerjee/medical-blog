@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :admin_exists?
 
 
   def current_user
@@ -16,6 +16,14 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "You must be logged in to perform that action"
       redirect_to login_path
     end
+  end
+
+  def admin_user
+    @admin_user = User.exists?(admin: true)
+  end
+
+  def admin_exists?
+    !!admin_user
   end
 
 end

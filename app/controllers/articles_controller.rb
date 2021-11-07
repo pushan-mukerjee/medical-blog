@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-    @articles = @articles.paginate(page: params[:page], per_page: 5)
+    #@articles = @articles.paginate(page: params[:page], per_page: 5)
     #byebug
   end
 
@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.user = current_user
     if @article.save
-      flash[:notice] = "Article was created successfully" 
+      flash[:notice] = "Article was created successfully"
       redirect_to @article #redirects to the show method defined by article_path or article in routes
     else
       render 'new' #renders the new article page if the article isn't saved to database
@@ -50,12 +50,12 @@ class ArticlesController < ApplicationController
 private
 
   def set_article
-    @article = Article.find(params[:id]) 
+    @article = Article.find(params[:id])
   end
 
   def article_params
     params.require(:article).permit(:title, :text, category_ids: [])
-  end   
+  end
 
   def require_same_user
     if current_user != @article.user && !current_user.admin?

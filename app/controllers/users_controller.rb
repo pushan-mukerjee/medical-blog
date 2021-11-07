@@ -46,9 +46,9 @@ class UsersController < ApplicationController
     redirect_to articles_path
   end
 
-  private 
+  private
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :admin)
   end
 
   def set_user
@@ -60,6 +60,6 @@ class UsersController < ApplicationController
       flash[:alert] = "You can only edit or delete your own account"
       redirect_to @user
     end
-  end 
+  end
 
 end

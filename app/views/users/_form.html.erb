@@ -23,6 +23,12 @@
               <%= form.password_field :password, rows: 10, class: "form-control shadow rounded", placeholder: "Choose a password" %>
             </div>
           </div>
+          <% if !admin_exists? || (logged_in? && current_user.admin?) %> 
+            <div class="field">
+              <%= form.label "Admin User", class: "form-check-label text-light" %>
+              <%= form.check_box :admin %>
+            </div>
+          <% end %>
           <div class="form-group row justify-content-center">
              <%= form.submit(@user.new_record? ? "Sign up" : "Update account", class: "btn btn-outline-light btn-lg") %>
           </div>
